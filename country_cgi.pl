@@ -3,18 +3,21 @@
 use strict;
 use warnings;
 
-use Getopt::Long;
+use CGI;
+my $q = CGI->new;
 
 # get input
-my ($total_syllables, $total_lines);
-GetOptions ( "syllables=i" => \$total_syllables,
-             "lines=i"     => \$total_lines );
+my $total_syllables=$q->param('syllables');
+my $total_lines=$q->param('lines');
+
+print "Content-Type:text/html\r\n\r\n";
+
 # and validate it
-if (!$total_syllables || !$total_lines) { die "error: params appear to be missing\n"; }
-if ($total_syllables !~ /(\d+)/ || $total_lines !~ /(\d+)/) { die "error: param input must be numeric\n"; }
-if ($total_syllables < 5 || $total_syllables > 10) { die "warning: Whoa partner, what kind of country music you lookin for?\n"; }
-if ($total_lines < 1) { die "warning: Ain't no song made of nothing, is it?\n"; } 
-elsif ($total_lines > 50) { die "warning: What, you think this is 'merican Pie or somethin?\n"; }
+if (!$total_syllables || !$total_lines) { print_error('error: params appear to be missing'); }
+if ($total_syllables !~ /(\d+)/ || $total_lines !~ /(\d+)/) { print_error('error: param input must be numeric'); }
+if ($total_syllables < 5 || $total_syllables > 10) { print_error('warning: Whoa partner, what kind of country music you lookin for?'); }
+if ($total_lines < 1) { print_error('warning: Aint no song made of nothing, is it?'); } 
+elsif ($total_lines > 50) { print_error("warning: What, you think this is 'merican Pie or somethin?"); }
 
 # the data, categorized by number of syllables
 my %words = (
@@ -37,7 +40,7 @@ for (my $line = 0; $line < $total_lines; ++$line) {  # loop for the amount of to
         $syllable += $random_syllables;
         print "$random_word ";
     }
-    print "\n";
+    print "<br>";
 }
 
 # subs
@@ -50,4 +53,9 @@ sub get_random_word {
     my $random_word_number = int(rand($random_array_size));
     my $random_word = $words{$random_syllable}[$random_word_number];
     return ($random_syllable, $random_word);
+}
+
+sub print_error {
+    my $error = shift;
+    print "$error\n" and die "$error";
 }
