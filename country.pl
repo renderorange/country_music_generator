@@ -21,9 +21,10 @@ elsif ($total_lines > 50) { print_error("warning: What, you think this is 'meric
 
 # the data, categorized by number of syllables
 my %words = (
-    '1' => ['beer', 'dog', 'bar', 'truck', 'walk', 'ride', 'drive', 'sway'],
-    '2' => ['girlfriend', 'weddin', 'chicken', 'bluejeans', 'dirtroad'],
-    '3' => ['honkeytonk', 'swaggerin', 'saunterin', 'moseyin'],
+    '1' => ['beer', 'dog', 'bar', 'truck', 'walk', 'ride', 'drive', 'sway', 'he', 'she', 'it', 'her', 'my', 'you', 'land', 'free', 'brave', 'dirt', 'road', 'farm', 'corn', 'wheat', 'can', 'case', 'gin', 'shot', 'glass', 'drink', 'drunk', 'the', 'his', 'gun', 'dogs', 'boots', 'belt', 'red', 'white', 'blue', 'jeans', 'night', 'girl', 'boy', 'girls', 'boys', 'dance', 'crick', 'creek', 'dock', 'done', 'love', 'field'],
+    '2' => ['girlfriend', 'weddin', 'chicken', 'bluejeans', 'dirtroad', 'rifle', 'river', 'buckle', 'lazy', 'chevy', 'freedom', 'jesus', 'gravel', 'tractor', 'bottle', 'whiskey', 'drinking', 'drinkin\'', 'the boys', 'ladies', 'shotgun', 'dirt road', 'bonfire', 'highway', 'small town', 'farmer', 'country', 'square dance', 'line dance', 'hodown', 'fishing', 'fishin\'', 'truckin\'', 'flatbed', 'off road', 'shit-faced', 'cheated', 'cheatin\'', 'walkin\'', 'over'],
+    '3' => ['honkeytonk', 'swaggerin', 'saunterin', 'moseyin', 'tequelia', 'blue collar', 'afternoon', 'four-by-four', 'off roadin\''],
+#    '4' => ['red white and blue'],
 );
 
 # build and output the sentences
