@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+use Math::Random::MT;
 use CGI;
 my $q = CGI->new;
 
@@ -47,11 +48,12 @@ for (my $line = 0; $line < $total_lines; ++$line) {  # loop for the amount of to
 # subs
 sub get_random_word {
     my $random_syllable = shift;  # if a number is passed in, get from that syllable tier
+    my $gen = Math::Random::MT->new();  # set up better random seed, unique to each run
     if (! defined $random_syllable) {
-        $random_syllable = int(rand(scalar keys %words)) + 1;  # otherwise, get from a random syllable tier
+        $random_syllable = int($gen->rand(scalar keys %words)) + 1;  # otherwise, get from a random syllable tier
     }
     my $random_array_size = scalar @{$words{$random_syllable}};
-    my $random_word_number = int(rand($random_array_size));
+    my $random_word_number = int($gen->rand($random_array_size));
     my $random_word = $words{$random_syllable}[$random_word_number];
     return ($random_syllable, $random_word);
 }
